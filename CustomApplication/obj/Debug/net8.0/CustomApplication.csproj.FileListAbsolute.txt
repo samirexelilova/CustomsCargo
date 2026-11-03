@@ -1,0 +1,15 @@
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.csproj.AssemblyReference.cache
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.AssemblyInfoInputs.cache
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.AssemblyInfo.cs
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.csproj.CoreCompileInputs.cache
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\bin\Debug\net8.0\CustomApplication.deps.json
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\bin\Debug\net8.0\CustomApplication.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\bin\Debug\net8.0\CustomApplication.pdb
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\bin\Debug\net8.0\CustomDomain.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\bin\Debug\net8.0\CustomDomain.pdb
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomAp.6818A0BE.Up2Date
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\refint\CustomApplication.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.pdb
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\ref\CustomApplication.dll

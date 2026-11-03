@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "oJNuoKJiTL0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Rinat_PC\\source\\repos\\Custom\\CustomDomain\\CustomDomain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rinat_PC\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.200\\microsoft.net.sdk.compilers.toolset.9.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}

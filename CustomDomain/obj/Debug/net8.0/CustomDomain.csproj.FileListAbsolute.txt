@@ -1,0 +1,11 @@
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\bin\Debug\net8.0\CustomDomain.deps.json
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\bin\Debug\net8.0\CustomDomain.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\bin\Debug\net8.0\CustomDomain.pdb
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\obj\Debug\net8.0\CustomDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\obj\Debug\net8.0\CustomDomain.AssemblyInfoInputs.cache
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\obj\Debug\net8.0\CustomDomain.AssemblyInfo.cs
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\obj\Debug\net8.0\CustomDomain.csproj.CoreCompileInputs.cache
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\obj\Debug\net8.0\CustomDomain.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\obj\Debug\net8.0\refint\CustomDomain.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\obj\Debug\net8.0\CustomDomain.pdb
+C:\Users\Rinat_PC\source\repos\Custom\CustomDomain\obj\Debug\net8.0\ref\CustomDomain.dll
