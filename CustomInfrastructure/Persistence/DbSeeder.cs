@@ -46,7 +46,7 @@ namespace CustomInfrastructure.Persistence
             }
             else if (!await db.Users.AnyAsync())
             {
-                var hash = hasher.Hash(password);   
+                var hash = hasher.Hash(password);
                 db.Users.AddRange(
                     new User { Email = "admin@customs.local", FullName = "Sistem Admin", Role = UserRole.Admin, PasswordHash = hash },
                     new User { Email = "officer@customs.local", FullName = "Gömrük Əməkdaşı", Role = UserRole.CustomsOfficer, PasswordHash = hash },
@@ -71,6 +71,32 @@ namespace CustomInfrastructure.Persistence
             }
 
             await db.SaveChangesAsync();
+
+            if (!await db.StoreProducts.AnyAsync())
+            {
+                var hs = await db.HsCodes.ToDictionaryAsync(h => h.Code);
+
+                void AddProduct(string store, string name, decimal price, decimal weightKg, string code)
+                {
+                    if (hs.TryGetValue(code, out var h))
+                        db.StoreProducts.Add(new StoreProduct
+                        {
+                            StoreName = store,
+                            Name = name,
+                            PriceUsd = price,
+                            WeightKg = weightKg,
+                            HsCodeId = h.Id
+                        });
+                }
+
+                AddProduct("Trendyol", "Pambıq köynək", 12.50m, 0.30m, "6109100000");
+                AddProduct("Trendyol", "Dəri ayaqqabı", 45.00m, 0.90m, "6403990000");
+                AddProduct("Amazon", "Smartfon X", 450.00m, 0.40m, "8517130000");
+                AddProduct("Amazon", "Noutbuk Pro 15", 900.00m, 2.00m, "8471300000");
+                AddProduct("Amazon", "Televizor 43\"", 320.00m, 8.00m, "8528720000");
+
+                await db.SaveChangesAsync();
+            }
         }
     }
 

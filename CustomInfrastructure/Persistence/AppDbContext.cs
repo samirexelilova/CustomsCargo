@@ -1,4 +1,5 @@
 ﻿using CustomDomain.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace CustomInfrastructure.Persistence
         public DbSet<DeclarationStatusHistory> StatusHistory => Set<DeclarationStatusHistory>();
         public DbSet<HsCode> HsCodes => Set<HsCode>();
         public DbSet<Warehouse> Warehouses => Set<Warehouse>();
+        public DbSet<StoreProduct> StoreProducts => Set<StoreProduct>();
+        public DbSet<StoreOrder> StoreOrders => Set<StoreOrder>();
+        public DbSet<StoreOrderItem> StoreOrderItems => Set<StoreOrderItem>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,5 +33,4 @@ namespace CustomInfrastructure.Persistence
                 modelBuilder.Entity(entity.ClrType).Property(nameof(BaseEntity.Id)).ValueGeneratedNever();
         }
     }
-
 }

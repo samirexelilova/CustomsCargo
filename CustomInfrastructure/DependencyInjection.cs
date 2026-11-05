@@ -4,6 +4,7 @@ using CustomInfrastructure.Auth;
 using CustomInfrastructure.Persistence;
 using CustomInfrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -30,6 +31,7 @@ namespace CustomInfrastructure
             services.AddScoped<IDeclarationRepository, DeclarationRepository>();
             services.AddScoped<IHsCodeRepository, HsCodeRepository>();
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
+            services.AddScoped<IStoreRepository, StoreRepository>();
 
             services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
             services.AddSingleton<IJwtTokenService, JwtTokenService>();

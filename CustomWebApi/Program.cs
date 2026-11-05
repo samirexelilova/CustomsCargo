@@ -1,4 +1,4 @@
-
+﻿
 using CustomApplication.Auth;
 using CustomApplication.Interfaces;
 using CustomApplication;
@@ -13,8 +13,14 @@ using System.Security.Claims;
 using System.Text.Json.Serialization;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, cfg) => cfg
+    .ReadFrom.Configuration(ctx.Configuration)
+    .Enrich.FromLogContext()                    
+    .Enrich.WithProperty("RequestId", "-"));     
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -25,7 +31,7 @@ builder.Services.AddScoped<ICurrentUser, CurrentUser>();
 var jwt = builder.Configuration.GetSection("Jwt").Get<JwtOptions>() ?? new JwtOptions();
 if (string.IsNullOrWhiteSpace(jwt.Key) || jwt.Key.Length < 32)
     throw new InvalidOperationException(
-        "Jwt:Key t?yin olunmay?b v? ya 32 simvoldan q?sad?r. User Secrets il? t?yin edin (README).");
+        "Jwt:Key təyin olunmayıb və ya 32 simvoldan qısadır. User Secrets ilə təyin edin.");
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -59,7 +65,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "accesstokeni yapisdir"
+        Description = "Giriş cavabındakı accessToken-i yapışdırın."
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -70,6 +76,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+app.UseMiddleware<RequestIdMiddleware>();
+app.UseSerilogRequestLogging();                  
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())

@@ -8,7 +8,6 @@ namespace CustomDomain.Services
 {
     public static class CustomsRules
     {
-        //Fiziki şəxs üçün rüsumsuz idxal limiti (USD)
         public const decimal IndividualExemptionLimitUsd = 300m;
     }
 

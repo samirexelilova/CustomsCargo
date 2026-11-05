@@ -229,6 +229,96 @@ namespace CustomInfrastructure.Migrations
                     b.ToTable("RefreshTokens");
                 });
 
+            modelBuilder.Entity("CustomDomain.Entities.StoreOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderNumber")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("StoreOrders");
+                });
+
+            modelBuilder.Entity("CustomDomain.Entities.StoreOrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StoreOrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StoreProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoreOrderId");
+
+                    b.HasIndex("StoreProductId");
+
+                    b.ToTable("StoreOrderItems");
+                });
+
+            modelBuilder.Entity("CustomDomain.Entities.StoreProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("HsCodeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal>("PriceUsd")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("StoreName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("WeightKg")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HsCodeId");
+
+                    b.ToTable("StoreProducts");
+                });
+
             modelBuilder.Entity("CustomDomain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -302,49 +392,6 @@ namespace CustomInfrastructure.Migrations
                     b.ToTable("Warehouses");
                 });
 
-            modelBuilder.Entity("CustomDomain.Entities.WarehouseArrival", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ArrivalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CitizenFin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HsCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeclared")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TrackingNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("WarehouseId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WarehouseId1");
-
-                    b.ToTable("WarehouseArrivals");
-                });
-
             modelBuilder.Entity("CustomDomain.Entities.Declaration", b =>
                 {
                     b.HasOne("CustomDomain.Entities.User", "Declarant")
@@ -413,19 +460,56 @@ namespace CustomInfrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CustomDomain.Entities.WarehouseArrival", b =>
+            modelBuilder.Entity("CustomDomain.Entities.StoreOrder", b =>
                 {
-                    b.HasOne("CustomDomain.Entities.Warehouse", "Warehouse")
+                    b.HasOne("CustomDomain.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("WarehouseId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("Warehouse");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CustomDomain.Entities.StoreOrderItem", b =>
+                {
+                    b.HasOne("CustomDomain.Entities.StoreOrder", "Order")
+                        .WithMany("Items")
+                        .HasForeignKey("StoreOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CustomDomain.Entities.StoreProduct", "Product")
+                        .WithMany()
+                        .HasForeignKey("StoreProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("CustomDomain.Entities.StoreProduct", b =>
+                {
+                    b.HasOne("CustomDomain.Entities.HsCode", "HsCode")
+                        .WithMany()
+                        .HasForeignKey("HsCodeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("HsCode");
                 });
 
             modelBuilder.Entity("CustomDomain.Entities.Declaration", b =>
                 {
                     b.Navigation("History");
 
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("CustomDomain.Entities.StoreOrder", b =>
+                {
                     b.Navigation("Items");
                 });
 

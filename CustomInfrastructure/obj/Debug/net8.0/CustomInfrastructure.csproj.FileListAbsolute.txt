@@ -17,3 +17,4 @@ C:\Users\Rinat_PC\source\repos\Custom\CustomInfrastructure\obj\Debug\net8.0\Cust
 C:\Users\Rinat_PC\source\repos\Custom\CustomInfrastructure\obj\Debug\net8.0\ref\CustomInfrastructure.dll
 C:\Users\Rinat_PC\source\repos\Custom\CustomInfrastructure\bin\Debug\net8.0\CustomInfrastructure.runtimeconfig.json
 C:\Users\Rinat_PC\source\repos\Custom\CustomInfrastructure\obj\Debug\net8.0\CustomInfrastructure.genruntimeconfig.cache
+C:\Users\Rinat_PC\source\repos\Custom\CustomInfrastructure\obj\Debug\net8.0\CustomInfrastructure.sourcelink.json

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace CustomDomain.Services
 {
-    //Status keçidləri və hansı rolun hansı keçidi edə bilməsi
     public static class DeclarationStateMachine
     {
         private sealed record Rule(DeclarationStatus From, DeclarationStatus To, UserRole[] Roles);

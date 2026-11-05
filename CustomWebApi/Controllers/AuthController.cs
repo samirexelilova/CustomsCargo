@@ -10,7 +10,6 @@ namespace CustomWebApi.Controllers
     [Route("api/auth")]
     public class AuthController(IAuthService auth) : ControllerBase
     {
-        //Deklarant qeydiyyatı 
         [HttpPost("register"), AllowAnonymous]
         public async Task<ActionResult<AuthResponse>> Register(RegisterRequest request, CancellationToken ct)
             => Ok(await auth.RegisterAsync(request, ct));

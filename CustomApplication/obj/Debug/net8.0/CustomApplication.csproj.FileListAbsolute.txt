@@ -13,3 +13,4 @@ C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomA
 C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\refint\CustomApplication.dll
 C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.pdb
 C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\ref\CustomApplication.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomApplication\obj\Debug\net8.0\CustomApplication.sourcelink.json

@@ -4,6 +4,7 @@ using CustomApplication.DTOs;
 using CustomApplication.Interfaces;
 using CustomDomain.Entities;
 using CustomDomain.Enums;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace CustomApplication.Services
      IUnitOfWork uow,
      IOptions<JwtOptions> jwtOptions,
      TimeProvider clock,
-     ICurrentUser currentUser) : IAuthService
+     ICurrentUser currentUser,
+     ILogger<AuthService> logger) : IAuthService
     {
         private const string InvalidCredentials = "E-poçt və ya parol səhvdir.";
 
@@ -40,7 +42,6 @@ namespace CustomApplication.Services
             if (await users.EmailExistsAsync(email, ct))
                 throw new ConflictException("Bu e-poçt artıq qeydiyyatdan keçib.");
 
-            // Açıq qeydiyyat yalniz Deklarant yaradır Əməkdaşları yalnız Admin yarada bilər
             var user = new User
             {
                 Email = email,
@@ -54,6 +55,7 @@ namespace CustomApplication.Services
 
             var response = IssueTokens(user);
             await uow.SaveChangesAsync(ct);
+            logger.LogInformation("Yeni deklarant qeydiyyatdan keçdi: {UserId}", user.Id);
             return response;
         }
 
@@ -63,21 +65,34 @@ namespace CustomApplication.Services
             var user = await users.GetByEmailAsync(NormalizeEmail(req.Email), ct);
 
             if (user is null || !user.IsActive)
+            {
+                logger.LogWarning("Uğursuz giriş: istifadəçi tapılmadı və ya deaktivdir ({Email})", NormalizeEmail(req.Email));
                 throw new UnauthorizedAppException(InvalidCredentials);
+            }
 
             if (user.IsLockedOut(now))
+            {
+                logger.LogWarning("Bloklanmış hesaba giriş cəhdi: {UserId}", user.Id);
                 throw new LockedOutException("Çox sayda uğursuz cəhd. Bir az sonra yenidən yoxlayın.");
+            }
 
             if (!hasher.Verify(req.Password ?? string.Empty, user.PasswordHash))
             {
                 user.RegisterFailedLogin(now);
                 await uow.SaveChangesAsync(ct);
+
+                if (user.IsLockedOut(now))
+                    logger.LogWarning("Hesab bloklandı (çox yanlış parol): {UserId}", user.Id);
+                else
+                    logger.LogWarning("Yanlış parol: {UserId}, ardıcıl uğursuz cəhd {Count}", user.Id, user.FailedLoginCount);
+
                 throw new UnauthorizedAppException(InvalidCredentials);
             }
 
             user.ResetLoginFailures();
             var response = IssueTokens(user);
             await uow.SaveChangesAsync(ct);
+            logger.LogInformation("İstifadəçi daxil oldu: {UserId}, rol {Role}", user.Id, user.Role);
             return response;
         }
 
@@ -90,6 +105,7 @@ namespace CustomApplication.Services
             if (stored.RevokedAt is not null)
             {
                 await users.RevokeAllRefreshTokensAsync(stored.UserId, now, ct);
+                logger.LogWarning("Ləğv olunmuş refresh token yenidən istifadə olundu, bütün tokenlər ləğv edildi: {UserId}", stored.UserId);
                 throw new UnauthorizedAppException("Token yanlışdır.");
             }
 
@@ -133,6 +149,7 @@ namespace CustomApplication.Services
             };
             users.Add(user);
             await uow.SaveChangesAsync(ct);
+            logger.LogInformation("Əməkdaş yaradıldı: {UserId}, rol {Role}", user.Id, user.Role);
             return ToDto(user);
         }
 

@@ -105,3 +105,5 @@ C:\Users\Rinat_PC\source\repos\Custom\Custom.Tests\obj\Debug\net8.0\refint\Custo
 C:\Users\Rinat_PC\source\repos\Custom\Custom.Tests\obj\Debug\net8.0\Custom.Tests.pdb
 C:\Users\Rinat_PC\source\repos\Custom\Custom.Tests\obj\Debug\net8.0\Custom.Tests.genruntimeconfig.cache
 C:\Users\Rinat_PC\source\repos\Custom\Custom.Tests\obj\Debug\net8.0\ref\Custom.Tests.dll
+C:\Users\Rinat_PC\source\repos\Custom\Custom.Tests\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Rinat_PC\source\repos\Custom\Custom.Tests\obj\Debug\net8.0\Custom.Tests.sourcelink.json

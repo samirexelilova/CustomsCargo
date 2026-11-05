@@ -347,6 +347,72 @@
     ]
   },
   {
+    "ContainingType": "CustomWebApi.Controllers.StoreController",
+    "Method": "CreateOrder",
+    "RelativePath": "api/store/orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "CustomApplication.DTOs.CreateStoreOrderRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CustomApplication.DTOs.StoreOrderDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CustomWebApi.Controllers.StoreController",
+    "Method": "MyOrders",
+    "RelativePath": "api/store/orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[CustomApplication.DTOs.StoreOrderDto, CustomApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CustomWebApi.Controllers.StoreController",
+    "Method": "Products",
+    "RelativePath": "api/store/products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[CustomApplication.DTOs.StoreProductDto, CustomApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "CustomWebApi.Controllers.ReferenceController",
     "Method": "Warehouses",
     "RelativePath": "api/warehouses",

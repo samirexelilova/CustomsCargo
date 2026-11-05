@@ -4,6 +4,7 @@ using CustomApplication.Interfaces;
 using CustomDomain.Entities;
 using CustomDomain.Enums;
 using CustomDomain.Services;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,8 @@ namespace CustomApplication.Services
      IUnitOfWork uow,
      CustomsDutyCalculator calculator,
      ICurrentUser currentUser,
-     TimeProvider clock) : IDeclarationService
+     TimeProvider clock,
+     ILogger<DeclarationService> logger) : IDeclarationService
     {
         private const int MaxItems = 100;
 
@@ -50,6 +52,10 @@ namespace CustomApplication.Services
             declarations.Add(declaration);
             await uow.SaveChangesAsync(ct);
 
+            logger.LogInformation(
+                "Bəyannamə yaradıldı: {Number}, istifadəçi {UserId}, rüsum {Duty}, ƏDV {Vat}",
+                declaration.Number, userId, declaration.TotalDuty, declaration.TotalVat);
+
             return await GetDetailOrThrow(declaration.Id, ct);
         }
 
@@ -67,6 +73,8 @@ namespace CustomApplication.Services
             declaration.ReplaceItems(BuildItems(req, found), req.WarehouseId);
             declaration.RecalculateDuty(calculator);
             await uow.SaveChangesAsync(ct);
+
+            logger.LogInformation("Bəyannamə yeniləndi: {Number}, istifadəçi {UserId}", declaration.Number, userId);
 
             return await GetDetailOrThrow(id, ct);
         }
@@ -107,6 +115,10 @@ namespace CustomApplication.Services
 
             declaration.ChangeStatus(to, userId, req.Reason?.Trim(), clock.GetUtcNow());
             await uow.SaveChangesAsync(ct);
+
+            logger.LogInformation(
+                "Bəyannamə {Number} statusu dəyişdi: {From} -> {To}, istifadəçi {UserId}, rol {Role}",
+                declaration.Number, from, to, userId, role);
 
             return await GetDetailOrThrow(id, ct);
         }

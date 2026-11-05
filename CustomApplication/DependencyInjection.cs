@@ -14,13 +14,15 @@ namespace CustomApplication
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddSingleton(TimeProvider.System);            // test zamanı saxta saatla əvəz olunur
-            services.AddSingleton<CustomsDutyCalculator>();       
+            services.AddSingleton(TimeProvider.System);           
+            services.AddSingleton<CustomsDutyCalculator>();
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IDeclarationService, DeclarationService>();
             services.AddScoped<IDutyService, DutyService>();
             services.AddScoped<IReferenceDataService, ReferenceDataService>();
+
+            services.AddScoped<IStoreService, StoreService>();
             return services;
         }
     }

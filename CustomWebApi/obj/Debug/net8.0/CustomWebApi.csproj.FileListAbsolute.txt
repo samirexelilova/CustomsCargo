@@ -155,3 +155,13 @@ C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\obj\Debug\net8.0\CustomWebApi
 C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\obj\Debug\net8.0\CustomWebApi.genruntimeconfig.cache
 C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\obj\Debug\net8.0\ref\CustomWebApi.dll
 C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\obj\Debug\net8.0\CustomWebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\obj\Debug\net8.0\CustomWebApi.sourcelink.json
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\Users\Rinat_PC\source\repos\Custom\CustomWebApi\bin\Debug\net8.0\Serilog.Sinks.File.dll
