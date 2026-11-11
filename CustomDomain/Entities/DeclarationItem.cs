@@ -19,11 +19,9 @@ namespace CustomDomain.Entities
         public decimal UnitPrice { get; set; }   // USD
         public decimal WeightKg { get; set; }
 
-        // Hesablanmış dəyərlər (bəyannamə saxlananda yazılır)
         public decimal DutyAmount { get; set; }
         public decimal VatAmount { get; set; }
 
-        //Gömrük dəyəri = say x vahid qiymət 
         public decimal CustomsValue => Quantity * UnitPrice;
     }
 }

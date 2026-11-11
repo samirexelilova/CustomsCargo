@@ -97,6 +97,16 @@ namespace CustomInfrastructure.Persistence
 
                 await db.SaveChangesAsync();
             }
+
+            if (!await db.CargoCompanies.AnyAsync())
+            {
+                var hub = await db.Warehouses.OrderBy(w => w.Name).FirstOrDefaultAsync();
+                if (hub is not null)
+                {
+                    db.CargoCompanies.Add(new CargoCompany { Name = "SmartCargo", IsActive = true, WarehouseId = hub.Id });
+                    await db.SaveChangesAsync();
+                }
+            }
         }
     }
 

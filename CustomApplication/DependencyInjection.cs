@@ -14,7 +14,7 @@ namespace CustomApplication
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddSingleton(TimeProvider.System);           
+            services.AddSingleton(TimeProvider.System);
             services.AddSingleton<CustomsDutyCalculator>();
 
             services.AddScoped<IAuthService, AuthService>();
@@ -23,6 +23,7 @@ namespace CustomApplication
             services.AddScoped<IReferenceDataService, ReferenceDataService>();
 
             services.AddScoped<IStoreService, StoreService>();
+            services.AddScoped<ICargoService, CargoService>();
             return services;
         }
     }

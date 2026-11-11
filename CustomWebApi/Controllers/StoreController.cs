@@ -15,6 +15,10 @@ namespace CustomWebApi.Controllers
         public async Task<ActionResult<IReadOnlyList<StoreProductDto>>> Products(CancellationToken ct)
             => Ok(await service.ListProductsAsync(ct));
 
+        [HttpGet("cargo-companies")]
+        public async Task<ActionResult<IReadOnlyList<CargoCompanyDto>>> CargoCompanies(CancellationToken ct)
+            => Ok(await service.ListCargoCompaniesAsync(ct));
+
         [HttpPost("orders"), Authorize(Policy = Policies.DeclarantOnly)]
         public async Task<ActionResult<StoreOrderDto>> CreateOrder(CreateStoreOrderRequest request, CancellationToken ct)
             => StatusCode(StatusCodes.Status201Created, await service.CreateOrderAsync(request, ct));
@@ -23,5 +27,6 @@ namespace CustomWebApi.Controllers
         public async Task<ActionResult<IReadOnlyList<StoreOrderDto>>> MyOrders(CancellationToken ct)
             => Ok(await service.ListMyOrdersAsync(ct));
     }
+
 
 }

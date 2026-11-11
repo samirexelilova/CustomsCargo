@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace CustomDomain.Entities
 {
-    //Bəyannamənin keçdiyi mərhələlər 
     public class DeclarationStatusHistory : BaseEntity
     {
         public Guid DeclarationId { get; set; }

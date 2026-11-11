@@ -32,6 +32,8 @@ namespace CustomInfrastructure
             services.AddScoped<IHsCodeRepository, HsCodeRepository>();
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
             services.AddScoped<IStoreRepository, StoreRepository>();
+            services.AddScoped<ICargoParcelRepository, CargoParcelRepository>();
+            services.AddScoped<ICargoCompanyRepository, CargoCompanyRepository>();
 
             services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
             services.AddSingleton<IJwtTokenService, JwtTokenService>();

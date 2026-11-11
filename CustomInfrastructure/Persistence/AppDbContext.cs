@@ -21,6 +21,8 @@ namespace CustomInfrastructure.Persistence
         public DbSet<StoreProduct> StoreProducts => Set<StoreProduct>();
         public DbSet<StoreOrder> StoreOrders => Set<StoreOrder>();
         public DbSet<StoreOrderItem> StoreOrderItems => Set<StoreOrderItem>();
+        public DbSet<CargoParcel> CargoParcels => Set<CargoParcel>();
+        public DbSet<CargoCompany> CargoCompanies => Set<CargoCompany>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

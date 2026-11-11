@@ -8,19 +8,16 @@ using System.Threading.Tasks;
 namespace CustomApplication.DTOs
 {
 
-    // Sorğular
     public record DeclarationItemRequest(string HsCode, string Description, int Quantity, decimal UnitPrice, decimal WeightKg);
     public record SaveDeclarationRequest(Guid WarehouseId, List<DeclarationItemRequest> Items);
     public record ChangeStatusRequest(DeclarationStatus TargetStatus, string? Reason);
     public record DeclarationQuery(int Page = 1, int PageSize = 20, DeclarationStatus? Status = null, string? Search = null);
 
-    //Kimin hansı bəyannamələri görə biləcəyi 
     public record DeclarationScope(Guid? OwnerId, bool ExcludeDrafts)
     {
         public static readonly DeclarationScope All = new(null, false);
     }
 
-    // Cavablar
     public record DeclarationListItemDto(
         Guid Id, string Number, DeclarationStatus Status, DeclarantType DeclarantType,
         string DeclarantName, decimal TotalPayable, DateTimeOffset CreatedAt, int ItemCount);

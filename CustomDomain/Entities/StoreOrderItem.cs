@@ -15,7 +15,7 @@ namespace CustomDomain.Entities
         public StoreProduct Product { get; set; } = null!;
 
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }   // sifarisdeki qiymet
+        public decimal UnitPrice { get; set; }   
     }
 
 }

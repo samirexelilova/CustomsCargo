@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace CustomDomain.Entities
 {
-    // Mal nomenklaturu. Dərəcələr faiz kəsridir: 0.15 = 15%
     public class HsCode : BaseEntity
     {
         public string Code { get; set; } = string.Empty;

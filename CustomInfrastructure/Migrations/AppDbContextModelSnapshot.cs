@@ -24,6 +24,89 @@ namespace CustomInfrastructure.Migrations
 
             modelBuilder.HasSequence<int>("DeclarationNumbers");
 
+            modelBuilder.Entity("CustomDomain.Entities.CargoCompany", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("CargoCompanies");
+                });
+
+            modelBuilder.Entity("CustomDomain.Entities.CargoParcel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("ArrivedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("CargoCompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DeclarationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("DeclaredAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("OwnerUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<Guid>("StoreOrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TrackingNumber")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CargoCompanyId");
+
+                    b.HasIndex("DeclarationId")
+                        .IsUnique()
+                        .HasFilter("[DeclarationId] IS NOT NULL");
+
+                    b.HasIndex("StoreOrderId")
+                        .IsUnique();
+
+                    b.HasIndex("TrackingNumber")
+                        .IsUnique();
+
+                    b.HasIndex("WarehouseId");
+
+                    b.HasIndex("OwnerUserId", "Status");
+
+                    b.ToTable("CargoParcels");
+                });
+
             modelBuilder.Entity("CustomDomain.Entities.Declaration", b =>
                 {
                     b.Property<Guid>("Id")
@@ -392,6 +475,58 @@ namespace CustomInfrastructure.Migrations
                     b.ToTable("Warehouses");
                 });
 
+            modelBuilder.Entity("CustomDomain.Entities.CargoCompany", b =>
+                {
+                    b.HasOne("CustomDomain.Entities.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Warehouse");
+                });
+
+            modelBuilder.Entity("CustomDomain.Entities.CargoParcel", b =>
+                {
+                    b.HasOne("CustomDomain.Entities.CargoCompany", "CargoCompany")
+                        .WithMany()
+                        .HasForeignKey("CargoCompanyId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CustomDomain.Entities.Declaration", "Declaration")
+                        .WithMany()
+                        .HasForeignKey("DeclarationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CustomDomain.Entities.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CustomDomain.Entities.StoreOrder", "Order")
+                        .WithOne("Parcel")
+                        .HasForeignKey("CustomDomain.Entities.CargoParcel", "StoreOrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CustomDomain.Entities.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CargoCompany");
+
+                    b.Navigation("Declaration");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Owner");
+
+                    b.Navigation("Warehouse");
+                });
+
             modelBuilder.Entity("CustomDomain.Entities.Declaration", b =>
                 {
                     b.HasOne("CustomDomain.Entities.User", "Declarant")
@@ -511,6 +646,8 @@ namespace CustomInfrastructure.Migrations
             modelBuilder.Entity("CustomDomain.Entities.StoreOrder", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("Parcel");
                 });
 
             modelBuilder.Entity("CustomDomain.Entities.User", b =>

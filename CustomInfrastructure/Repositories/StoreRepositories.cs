@@ -31,7 +31,10 @@ namespace CustomInfrastructure.Repositories
                     o.Id, o.OrderNumber, o.CreatedAt, o.TotalAmount,
                     o.Items.Select(i => new StoreOrderItemDto(
                         i.StoreProductId, i.Product.Name, i.Product.StoreName,
-                        i.Quantity, i.UnitPrice, i.Quantity * i.UnitPrice)).ToList()))
+                        i.Quantity, i.UnitPrice, i.Quantity * i.UnitPrice)).ToList(),
+                    o.Parcel != null ? o.Parcel.Id : (Guid?)null,
+                    o.Parcel != null ? o.Parcel.TrackingNumber : null,
+                    o.Parcel != null && o.Parcel.CargoCompany != null ? o.Parcel.CargoCompany.Name : null))
                 .ToListAsync(ct);
 
         public void AddOrder(StoreOrder order) => db.StoreOrders.Add(order);

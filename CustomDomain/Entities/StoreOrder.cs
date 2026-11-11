@@ -17,5 +17,7 @@ namespace CustomDomain.Entities
         public DateTimeOffset CreatedAt { get; set; }
 
         public ICollection<StoreOrderItem> Items { get; set; } = new List<StoreOrderItem>();
+
+        public CargoParcel? Parcel { get; set; }
     }
 }
